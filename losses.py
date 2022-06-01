@@ -22,7 +22,7 @@ def loss_fn(model, x, marginal_prob_std, eps=1e-5):
   # score = score_fn(perturbed_data, t)
 
 
-  print(x.shape, z.shape, random_t.shape, std.shape)
+  # print(x.shape, z.shape, random_t.shape, std.shape)
   perturbed_x = x + z * std[:, None, None, None]
   score = model(perturbed_x, random_t)
   loss = torch.mean(torch.sum((score * std[:, None, None, None] + z)**2, dim=(1,2,3)))
