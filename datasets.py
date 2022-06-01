@@ -11,7 +11,12 @@ class COCODataset(torch.utils.data.Dataset):
             self, imgs_dir, captions_path, transform = None, tgt_img_size = (256, 256)
     ):
         # create list of images directories
-        self.imgs_path = ['{}/{}'.format(imgs_dir, img_name) for img_name in os.listdir(imgs_dir)]
+        self.imgs_path = []
+        for img_name in os.listdir(imgs_dir):
+            image = Image.open('{}/{}'.format(imgs_dir, img_name))
+            print(image.shape)
+            self.imgs_path.append('{}/{}'.format(imgs_dir, img_name))
+            # ['{}/{}'.format(imgs_dir, img_name) for img_name in os.listdir(imgs_dir)]
 
         # create JSON captions
         f = open(captions_path)
