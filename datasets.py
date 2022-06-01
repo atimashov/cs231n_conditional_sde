@@ -39,8 +39,8 @@ class COCODataset(torch.utils.data.Dataset):
         return image, torch.zeros(1)
 
 def test():
-    imgs_dir = '{}/images'
-    captions_path = 1
+    imgs_dir = '/home/ubuntu/datasets/coco/train2017/'
+    captions_path = '/home/ubuntu/datasets/coco/annotations/captions_train2017.json'
     data = COCODataset(
         imgs_dir = imgs_dir, captions_path = captions_path
     )
