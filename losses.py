@@ -11,9 +11,17 @@ def loss_fn(model, x, marginal_prob_std, eps=1e-5):
       the perturbation kernel.
     eps: A tolerance value for numerical stability.
   """
-  random_t = torch.rand(x.shape[0], device=x.device) * (1. - eps) + eps # random values from **a uniform** distribution fom [0, 1)
+  random_t = torch.rand(x.shape[0], device=x.device) * (1. - eps) + eps # random values from **a uniform** distribution fom [0, 1) !!! (in more general case we can use T instead of 1)
   z = torch.randn_like(x) # random values from **a normal** distribution with mean = 0 and variance = 1
   std = marginal_prob_std(random_t)
+
+  # t = torch.rand(batch.shape[0], device=batch.device) * (sde.T - eps) + eps
+  # z = torch.randn_like(batch)
+  # mean, std = sde.marginal_prob(batch, t)
+  # perturbed_data = mean + std[:, None, None, None] * z
+  # score = score_fn(perturbed_data, t)
+
+
   print(x.shape, z.shape, random_t.shape, std.shape)
   perturbed_x = x + z * std[:, None, None, None]
   score = model(perturbed_x, random_t)
