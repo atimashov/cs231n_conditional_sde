@@ -18,13 +18,14 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 sigma =  25.0
 marginal_prob_std_fn = functools.partial(marginal_prob_std, sigma=sigma, device = device)
 diffusion_coeff_fn = functools.partial(diffusion_coeff, sigma=sigma, device = device)
-score_model = torch.nn.DataParallel(ScoreNet(marginal_prob_std=marginal_prob_std_fn))
+
+score_model = torch.nn.DataParallel(DDPM())
 
 score_model = score_model.to(device)
 
 n_epochs =   50#@param {'type':'integer'}
 ## size of a mini-batch
-batch_size =  32 #@param {'type':'integer'}
+batch_size =  4 #@param {'type':'integer'}
 ## learning rate
 lr=1e-4 #@param {'type':'number'}
 
