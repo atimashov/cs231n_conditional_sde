@@ -34,7 +34,7 @@ if __name__ =='__main__':
     diffusion_coeff_fn = functools.partial(diffusion_coeff, sigma = sigma)
 
     # score_model = score_model = torch.nn.DataParallel(ScoreNet(marginal_prob_std=marginal_prob_std_fn))
-    score_model = score_model = torch.nn.DataParallel(DDPM())
+    score_model = torch.nn.DataParallel(DDPM())
     score_model = score_model.to(device)
     ckpt = torch.load('ckpt.pth', map_location = device)
     score_model.load_state_dict(ckpt)
