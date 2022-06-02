@@ -36,7 +36,7 @@ if __name__ =='__main__':
     # score_model = score_model = torch.nn.DataParallel(ScoreNet(marginal_prob_std=marginal_prob_std_fn))
     score_model = torch.nn.DataParallel(DDPM())
     score_model = score_model.to(device)
-    ckpt = torch.load('ckpt.pth', map_location = device)
+    ckpt = torch.load('ckpt_coco_ep4.pth', map_location = device)
     score_model.load_state_dict(ckpt)
 
     ## Generate samples using the specified sampler.
@@ -52,7 +52,7 @@ if __name__ =='__main__':
 
     sample_grid = make_grid(samples, nrow=int(np.sqrt(sample_batch_size)))
     print(sample_grid.shape)
-    save_image(sample_grid, 'img1.png')
+    save_image(sample_grid, 'img_coco1.png')
 
     # plt.figure(figsize=(6, 6))
     # plt.axis('off')
