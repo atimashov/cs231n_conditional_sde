@@ -19,6 +19,7 @@ sigma =  25.0
 marginal_prob_std_fn = functools.partial(marginal_prob_std, sigma=sigma, device = device)
 diffusion_coeff_fn = functools.partial(diffusion_coeff, sigma=sigma, device = device)
 score_model = torch.nn.DataParallel(ScoreNet(marginal_prob_std=marginal_prob_std_fn))
+
 score_model = score_model.to(device)
 
 n_epochs =   50#@param {'type':'integer'}
