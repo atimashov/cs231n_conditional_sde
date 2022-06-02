@@ -6,6 +6,7 @@ from utils import (
 marginal_prob_std,
 diffusion_coeff,
 Euler_Maruyama_sampler,
+Euler_Maruyama_sampler_coco,
 pc_sampler,
 ode_sampler
 )
@@ -24,7 +25,7 @@ if __name__ =='__main__':
     inputs = parser.parse_args()
     print(inputs)
     device = inputs.device
-    sampler = ode_sampler if inputs.sampler == 'ode' else pc_sampler if inputs.sampler == 'pc' else Euler_Maruyama_sampler
+    sampler = ode_sampler if inputs.sampler == 'ode' else pc_sampler if inputs.sampler == 'pc' else Euler_Maruyama_sampler_coco()
     sample_batch_size = inputs.sample_batch_size
     sigma = inputs.sigma
 
